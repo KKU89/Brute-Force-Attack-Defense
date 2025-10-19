@@ -3,11 +3,11 @@ import time
 
 app = Flask(__name__)
 
-# In-memory failed attempts tracker
+
 attempts = {}
 
-LOCKOUT_THRESHOLD = 3  # 3 galat attempts allowed
-LOCKOUT_TIME = 60      # 1 minute lockout
+LOCKOUT_THRESHOLD = 3  
+LOCKOUT_TIME = 60      
 
 LOGIN_PAGE = '''
 <form method="POST" action="/login">
@@ -31,16 +31,13 @@ def login():
     key = username or ip
     now = time.time()
 
-    # Purane lockout hatao
     if key in attempts and now - attempts[key][0] > LOCKOUT_TIME:
         attempts.pop(key)
 
-    # Agar lockout hai
     if key in attempts and attempts[key][1] >= LOCKOUT_THRESHOLD:
         msg = "Account Locked: Too many failed attempts. Try after 1 min."
         return render_template_string(LOGIN_PAGE, msg=msg), 429
 
-    # Login attempt
     if password == "admin":
         attempts.pop(key, None)
         return render_template_string(LOGIN_PAGE, msg="Login successful!"), 200
@@ -59,3 +56,4 @@ def login():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+
