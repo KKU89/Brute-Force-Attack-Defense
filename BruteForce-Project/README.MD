@@ -1,63 +1,91 @@
 Brute Force Attack & Defense Project:-
 
+
 This Python project demonstrates how brute force attacks work and how to defend against them using rate limiting and account lockouts. Made for cybersecurity learning only.
+
 
 Requirements:-
 - Python 3.x
 - Flask
 - requests
 
-Defensive Tool — Rate Limiter & Account Lockout
 
-This is a simple Python Flask server that protects a login page from brute force attacks.
+Installation:-
 
-What It Does:
-Tracks failed login attempts for each user or IP address.
-If someone enters the wrong password 3 times, their account is locked for 1 minute.
-Shows a lockout message on the web page and sends a special error code (429) for scripts.
+Install Flask:
+pip install flask
 
-How to Use:
-Open a terminal in this folder.
-Install Flask: pip install flask
-Run the server:
-Open http://127.0.0.1:5001/ in your browser.
-Try logging in with wrong passwords to see the lockout in action.
+Install requests:
+pip install requests
+
+
+Project Structure:-
+
+defensive-tool/    - Rate limiting and account lockout defense server
+offensive-tool/    - Brute force attack simulation script
+screenshots/       - Project demonstration and testing results
+
 
 How to run:-
+
+
+Step 1: Start Defense Server (Run this first)
+
 cd defensive-tool
 python test_server.py
 
-Open browser at: http://127.0.0.1:5001/
+Server will start at: http://127.0.0.1:5001/
 
 
-Offensive Tool — Brute Force Attacker:
-This is a simple Python script that performs a brute force attack on a test server's login page.  
-It tries a list of passwords one by one until it finds the correct password.
+Step 2: Run Attack Tool (Open new terminal)
 
-How to Use:
-1. Make sure the test server (defensive tool) is running.
-2. Open a terminal in this folder.
-3. Install the required library:
-pip install requests
-4. Run the script:
-python brute_force.py
-
-What This Script Does:
-- Sends login requests to the server using different passwords.
-- Stops when the correct password is found.
-- Shows the result in the terminal.
-
-Run Attack Tool (Optional):
 cd offensive-tool
 python brute_force.py
 
+Watch the attack attempts and see how defense blocks repeated failed logins!
+
+
+Defensive Tool - How It Works:-
+
+Tracks failed login attempts per user and IP address
+Blocks account after 3 failed password attempts
+Applies 60-second lockout period
+Returns HTTP 429 (Too Many Requests) status code
+Displays lockout message to users
+
+
+Offensive Tool - How It Works:-
+
+Tests multiple password combinations automatically
+Sends POST requests to login endpoint
+Logs success/failure for each attempt
+Stops when correct password is found
+Demonstrates brute force attack mechanism
+
+
+HTTP Status Codes Used:-
+
+200 (OK) - Successful login with correct credentials
+401 (Unauthorized) - Login failed due to wrong username or password
+429 (Too Many Requests) - Account locked after excessive failed attempts, rate limiting active
+
+
+Screenshots:-
+
+Project demonstration available in /screenshots folder showing complete attack-defense lifecycle.
+
+
 What I Learned:-
-- Brute force attack mechanisms
-- Rate limiting and temporary IP blocking
-- Flask web application security
+
+- Brute force attack mechanisms and automation
+- Rate limiting and temporary IP blocking techniques
+- Flask web application security implementation
+- HTTP status codes for security responses (200, 401, 429)
 - Offensive and defensive security concepts
+- Real-time threat detection and response systems
+- Account lockout mechanisms to prevent unauthorized access
+
 
 Disclaimer:-
+
 For educational use only—never run on systems without permission.
-
-
