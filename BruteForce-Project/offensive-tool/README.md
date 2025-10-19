@@ -17,8 +17,8 @@ How to Use:
 2. Open a terminal in this folder.
 
 3. Install the required library:
-
 pip install requests
+
 4. Run the script:
 
 python brute_force.py
@@ -37,6 +37,7 @@ What This Script Does:
 
 
 NOTE:-This tool is for lab/demo use only. Do not use it outside a safe environment.
+
 
 
 
